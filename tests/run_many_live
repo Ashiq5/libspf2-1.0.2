@@ -1,0 +1,17 @@
+#!/bin/sh
+[ -z "$srcdir" ] && srcdir=.
+echo
+echo "Running piped tests using live data..."
+TODO='';
+for i in 139 140 142 145 146 149 `seq 154 167` ; do
+	TODO="$TODO --todo=$i=Persistent_data_error?"
+done
+exec $srcdir/test test_live -pipe "$@" \
+	--todo=121='FIXME' \
+	--todo=135.result='FIXME' \
+	--todo=136.result='FIXME' \
+	--todo=137.result='FIXME' \
+	$TODO \
+	--todo=168='FIXME' \
+	--todo=169='FIXME'
+

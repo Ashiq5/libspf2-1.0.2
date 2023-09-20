@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#set -x 
+
+# just to make gdb<->bash easier
+
+rm -f ./mtrace.out
+
+export MALLOC_TRACE=./mtrace.out 
+export MALLOC_CHECK_=2
+
+source valgrind_wrapper
+
+mout=`mtrace $PROG mtrace.out 2>/dev/null`
+
+[ "$mout" != "No memory leaks." ] && echo "$mout"
